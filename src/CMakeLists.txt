@@ -1,0 +1,2 @@
+include_directories(com)
+add_subdirectory(test_ppm)
