@@ -1,2 +1,5 @@
 include_directories(com)
 add_subdirectory(test_ppm)
+add_subdirectory(test_scene)
+add_subdirectory(test_sphere)
+add_subdirectory(test_normal)
