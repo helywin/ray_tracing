@@ -14,7 +14,9 @@
 #include <iostream>
 #include <fstream>
 #include <mutex>
+#ifdef _WINDOWS
 #include <omp.h>
+#endif
 
 // 利用递归把光路逆转
 color ray_color(const ray &r, const hittable &world, int depth)
@@ -60,14 +62,18 @@ int main(int argc, char *argv[])
 
     // Render
     auto full_path = std::string(argv[0]);
+#ifdef _WINDOWS
     auto splash_pos = full_path.find_last_of('\\');
+#else
+    auto splash_pos = full_path.find_last_of('/');
+#endif
     auto dot_pos = full_path.find_last_of('.');
     auto name = full_path.substr(splash_pos + 1, dot_pos - splash_pos - 1) + ".png";
 
     std::mutex lock;
     int count = 0;
 
-#pragma omp  for num_threads(16)
+#pragma omp  for
     for (int j = 0; j < image_height; ++j) {
         for (int i = 0; i < image_width; ++i) {
             color pixel_color{0, 0, 0};
