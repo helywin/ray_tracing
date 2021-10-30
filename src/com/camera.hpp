@@ -5,8 +5,6 @@
 #ifndef RAY_TRACING_CAMERA_HPP
 #define RAY_TRACING_CAMERA_HPP
 
-#include "constants.hpp"
-
 class camera
 {
 public:

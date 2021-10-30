@@ -6,7 +6,6 @@
 #define RAY_TRACING_HITTABLE_LIST_HPP
 
 #include "hittable.hpp"
-#include "constants.hpp"
 
 #include <vector>
 
@@ -14,7 +13,7 @@ class hittable_list : public hittable
 {
 public:
     hittable_list() = default;
-    hittable_list(std::initializer_list<shared_ptr<hittable>> args)
+    hittable_list(std::initializer_list<std::shared_ptr<hittable>> args)
     {
         for (const auto &e: args) {
             objects.push_back(e);
@@ -24,7 +23,7 @@ public:
     void clear()
     { objects.clear(); }
 
-    void add(const shared_ptr<hittable> &object)
+    void add(const std::shared_ptr<hittable> &object)
     { objects.push_back(object); }
 
     bool hit(const ray &r, double t_min, double t_max, hit_record &rec) const override;

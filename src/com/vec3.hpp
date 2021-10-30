@@ -7,6 +7,7 @@
 
 #include <cmath>
 #include <iostream>
+#include "math.hpp"
 
 using std::sqrt;
 
@@ -66,6 +67,18 @@ public:
     double length_squared() const
     {
         return e[0] * e[0] + e[1] * e[1] + e[2] * e[2];
+    }
+
+    inline static vec3 random()
+    {
+        return {random_double(), random_double(), random_double()};
+    }
+
+    inline static vec3 random(double min, double max)
+    {
+        return {random_double(min, max),
+                random_double(min, max),
+                random_double(min, max)};
     }
 
 public:
@@ -140,6 +153,28 @@ inline vec3 cross(const vec3 &u, const vec3 &v)
 inline vec3 unit_vector(vec3 v)
 {
     return v / v.length();
+}
+
+// 用球坐标会好一点
+vec3 random_in_unit_sphere1()
+{
+    while (true) {
+        auto p = vec3::random(-1, 1);
+        if (p.length_squared() >= 1) continue;
+        return p;
+    }
+}
+
+vec3 random_in_unit_sphere()
+{
+    double u = random_double(0, 1);
+    double v = random_double(0, 1);
+    double theta = 2 * pi * u;
+    double phi = acos(2 * v - 1);
+    double x = sin(theta) * sin(phi);
+    double y = cos(theta) * sin(phi);
+    double z = 2 * v - 1;
+    return {x, y, z};
 }
 
 #endif //RAY_TRACING_VEC3_HPP

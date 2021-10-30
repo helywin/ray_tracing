@@ -1,21 +1,14 @@
 //
-// Created by helywin on 2021/10/29.
+// Created by helywin on 2021/10/30.
 //
 
-#ifndef RAY_TRACING_CONSTANTS_HPP
-#define RAY_TRACING_CONSTANTS_HPP
+#ifndef RAY_TRACING_RANDOM_HPP
+#define RAY_TRACING_RANDOM_HPP
 
 #include <cmath>
 #include <limits>
 #include <memory>
 #include <random>
-
-#include "ray.hpp"
-#include "vec3.hpp"
-
-using std::shared_ptr;
-using std::make_shared;
-using std::sqrt;
 
 constexpr double infinity = std::numeric_limits<double>::infinity();
 constexpr double pi = 3.1415926535897932385;
@@ -46,20 +39,4 @@ inline constexpr double clamp(double x, double min, double max)
     return x;
 }
 
-void write_color(std::ostream &out, color pixel_color, int samples_per_pixel)
-{
-    auto r = pixel_color.x();
-    auto g = pixel_color.y();
-    auto b = pixel_color.z();
-
-    auto scale = 1.0 / samples_per_pixel;
-    r *= scale;
-    g *= scale;
-    b *= scale;
-
-    out << static_cast<int>(256 * clamp(r, 0.0, 0.999)) << ' '
-        << static_cast<int>(256 * clamp(g, 0.0, 0.999)) << ' '
-        << static_cast<int>(256 * clamp(b, 0.0, 0.999)) << '\n';
-}
-
-#endif //RAY_TRACING_CONSTANTS_HPP
+#endif //RAY_TRACING_RANDOM_HPP
